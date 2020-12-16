@@ -14,4 +14,10 @@ public class CheckUserInfoIm implements CheckUserInfo {
         UserBean user = userMapper.CheckUserInfo(userName, password);
         return user;
     }
+
+    @Override
+    public UserBean ajaxCheckUserName(String txtName) {
+        UserBean user = userMapper.ajaxCheckUserName(txtName);
+        return user;
+    }
 }

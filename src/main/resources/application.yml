@@ -5,10 +5,21 @@ spring:
     username: root  #\u7528\u6237\u540D
     password:   #\u5BC6\u7801
     driver-class-name: com.mysql.cj.jdbc.Driver #\u6570\u636E\u5E93\u9A71\u52A8
-  mvc:
-    view:
-      prefix: /templates/
-      suffix: .html
+  # 是否开启thymeleaf缓存,本地为false，生产建议为true
+  freemarker:
+    cache: false
+    charset: UTF-8
+    allow-request-override: false
+    check-template-location: true
+  #类型
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+  #
+  #文件后缀
+    suffix: .ftl
+  #路径 .ftl文件就创建在templates下面或者子目录
+    template-loader-path: classpath:/templates/
   #启动热加载
   devtools:
   restart-enabled: true

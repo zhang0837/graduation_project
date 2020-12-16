@@ -4,4 +4,8 @@
     <select id="CheckUserInfo" parameterType="String" resultType="com.example.demo.bean.UserBean">
         SELECT * FROM register1 WHERE user_name = #{userName} AND password = #{password}
     </select>
+
+    <select id="ajaxCheckUserName" parameterType="String" resultType="com.example.demo.bean.UserBean">
+        SELECT * FROM register1 WHERE user_name = #{userName}
+    </select>
 </mapper>

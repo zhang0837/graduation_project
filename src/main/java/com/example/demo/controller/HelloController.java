@@ -1,18 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.bean.UserBean;
-import com.example.demo.mapper.UserMapper;
-import com.example.demo.service.CheckUserInfo;
 import com.example.demo.service.CheckUserInfoIm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import sun.text.normalizer.NormalizerBase;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
@@ -23,15 +17,30 @@ public class HelloController {
     public String homePage() {
         return "login";
     }
+
+    @RequestMapping(value = "registerPage")
+    public String registerPage() {
+        return "regist";
+    }
+
+    @ResponseBody
     @RequestMapping("checkUserInfo")
-    public String checkUserinfo(Model model,String userName, String password) {
-        UserBean user = checkUserInfoIm.checkUserInfo(userName,password);
-        if(user==null){
-            model.addAttribute("message","你还没注册，请先注册后登录");
-            return "error";
-        }else {
-            model.addAttribute("message", "登录成功");
-            return "success";
+    public boolean checkUserinfo(String txtName, String txtPass) {
+        UserBean user = checkUserInfoIm.checkUserInfo(txtName, txtPass);
+        if (user == null) {
+            return false;
+        } else {
+             return true;
+        }
+    }
+    @ResponseBody
+    @RequestMapping("ajaxCheckUserName")
+    public boolean ajaxCheckUserName(String txtName) {
+        UserBean user = checkUserInfoIm.ajaxCheckUserName(txtName);
+        if (user == null) {
+            return false;
+        } else {
+            return true;
         }
     }
 }
